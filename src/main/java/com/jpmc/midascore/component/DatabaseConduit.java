@@ -5,6 +5,8 @@ import com.jpmc.midascore.repository.UserRepository;
 import com.jpmc.midascore.repository.TransactionRecordRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import com.jpmc.midascore.foundation.Balance;
 import com.jpmc.midascore.foundation.Incentive;
 import com.jpmc.midascore.foundation.Transaction;
 import com.jpmc.midascore.entity.TransactionRecord;
@@ -71,9 +73,24 @@ public class DatabaseConduit {
        System.out.println("Transaction processed and saved: " + transactionRecord);
     }
 
+    public Balance getBalance(long userId){
+        UserRecord userRecord = userRepository.findById(userId);
+        if(userRecord == null){
+            return new Balance(0.0f); // Return a default balance of 0 if the user is not found
+        }else{
+                
+                return new Balance(userRecord.getBalance());
+        }
+        
+        
+    }
+
     
     public void save(UserRecord userRecord) {
         userRepository.save(userRecord);
     }
 
+
+
+   
 }

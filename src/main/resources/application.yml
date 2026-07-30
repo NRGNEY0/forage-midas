@@ -1,6 +1,7 @@
 general:
   kafka-topic: trader-updates
 
+
 spring:
   kafka:
     producer:
@@ -10,3 +11,7 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: com.jpmc.midascore.foundation
+
+server:
+  port: 33400
+  
